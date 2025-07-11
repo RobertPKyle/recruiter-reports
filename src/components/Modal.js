@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Modal({ onClose, onSubmit }) {

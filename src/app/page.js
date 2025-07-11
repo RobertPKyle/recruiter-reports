@@ -2,8 +2,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabaseClient';
-import Modal from '@/components/Modal';
+import { supabase } from '../lib/supabaseClient';
+import Modal from '../components/Modal';
 
 export default function Home() {
   const [reports, setReports] = useState([]);
