@@ -1,9 +1,9 @@
-// components/Modal.js
 'use client';
 
 import { useState, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import ReCAPTCHA from 'react-google-recaptcha';
+import styles from './Modal.module.css';
 
 export default function Modal({ onClose, onSubmit }) {
   const [form, setForm] = useState({
@@ -41,15 +41,15 @@ export default function Modal({ onClose, onSubmit }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-2xl p-6 w-full max-w-md space-y-4">
-        <h2 className="text-2xl font-bold mb-2">Submit a Recruiter</h2>
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
+        <h2>Submit a Recruiter</h2>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <input name="name" placeholder="Name (required)" value={form.name} onChange={handleChange} required />
           <input name="phone_number" placeholder="Phone Number" value={form.phone_number} onChange={handleChange} />
-          <input name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+          <input name="email" placeholder="Email" value={form.email} onChange={handleChange} />
           <input name="company" placeholder="Company" value={form.company} onChange={handleChange} />
-          <textarea name="extra_details" placeholder="Extra Details" value={form.extra_details} onChange={handleChange} rows={3} />
+          <textarea name="extra_details" placeholder="Extra Details (required)" value={form.extra_details} onChange={handleChange} required/>
 
           <ReCAPTCHA
             ref={recaptchaRef}
@@ -57,9 +57,9 @@ export default function Modal({ onClose, onSubmit }) {
             onChange={token => setCaptchaToken(token)}
           />
 
-          <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700">Cancel</button>
-            <button type="submit" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white">Submit</button>
+          <div className={styles.actions}>
+            <button type="button" onClick={onClose} className={styles.cancelButton}>Cancel</button>
+            <button type="submit" className={styles.submitButton}>Submit</button>
           </div>
         </form>
       </div>
